@@ -1,0 +1,29 @@
+<div class="container-form" style="height: 100vh;">
+    <div class="form-content">
+      <h1 id="title">{{ isRegistering ? 'Registrar' : 'Acceder' }}</h1>
+      <form id="form-account">
+        <div class="grupo-input">
+          <div class="input-field" [ngStyle]="{'max-height': isRegistering ? '100px' : '0', 'overflow': 'hidden', 'transition': 'max-height 0.5s ease'}">
+            <i class="fa-solid fa-user"></i>
+            <input type="text" placeholder="Usuario" name="usuario">
+          </div>
+          <div class="input-field">
+            <i class="fa-solid fa-envelope"></i>
+            <input type="text" placeholder="Email" name="email">
+          </div>
+          <div class="input-field">
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" placeholder="Contraseña" name="contraseña">
+          </div>
+          <a href="#" class="forgot-pass" id="forgotID">¿HAS OLVIDADO TU CONTRASEÑA?</a>
+        </div>
+        <div class="btn-field">
+          <button type="submit" class="btn btn-danger me-2">{{ isRegistering ? 'Registrar' : 'Acceder' }}</button>
+        </div>
+        <div id="LogUp">
+          <p class="account-text">{{ isRegistering ? '¿Ya tienes cuenta?' : '¿No tienes cuenta?' }}</p>
+          <a class="link-text" (click)="toggleForm()">{{ isRegistering ? 'INICIAR SESIÓN' : 'CREAR UNA' }}</a>
+        </div>
+      </form>
+    </div>
+  </div>

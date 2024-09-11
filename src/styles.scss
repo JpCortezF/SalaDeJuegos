@@ -1,1 +1,59 @@
 /* You can add global styles to this file, and also import other style files */
+.navbar {
+  background-color: #382e1b;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 8px;
+  padding: 0;
+}
+.nav-icons li{
+  padding: 0.7rem;
+  margin-bottom: auto;
+  margin-top: auto;
+}
+
+.nav-icon{
+  font-size: 1.3rem;
+  color: white;
+  cursor: pointer;
+}
+
+.nav-icons li:hover{
+  background-color: rgb(12, 18, 27);
+  cursor: pointer;
+  margin-bottom: auto;
+  margin-top: auto;
+}
+
+.dropdown-menu li:hover{
+  background-color: transparent;
+  cursor: pointer;
+  margin-bottom: auto;
+  margin-top: auto;
+}
+
+body {
+  background: linear-gradient(180deg, #171a21 0%, #1b2838 100%);
+  color: #c7d5e0;
+  min-height: 100vh;
+}
+
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Mínimo 100% de la altura de la ventana */
+}
+
+router-outlet {
+  flex-grow: 1; /* Hacemos que el contenido ocupe el espacio disponible */
+}
+
+footer {
+  background-color: #151f2e; /* Ejemplo de color para el fondo del footer */
+  color: white; /* Ejemplo de color para el texto */
+  text-align: center;
+  padding: 1rem;
+}
+
+::selection {
+  background: none;
+  color: #d13d49;
+}
