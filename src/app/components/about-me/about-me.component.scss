@@ -3,7 +3,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: calc(100vh - 200px);
     padding: 20px;
     gap: 20px;
 }
@@ -14,13 +14,12 @@
 
 .photo img {
     border-radius: 50%;
-    width: 100%;
-    max-width: 350px;
+    max-width: 430px;
     height: auto;
   }
 
   .about-me {
-    background-color: white;
+    background-color: rgb(228, 228, 228);
     border-radius: 15px;
     padding: 20px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -39,15 +38,22 @@
     font-size: 36px;
   }
 
+  .headline-game{
+    color: rgb(156 163 175);
+  }
+
   .content p{
     color: black;
   }
 
 
   @media (max-width: 1200px){
-    .photo img {
-        max-width: 325px;
-        margin-top: 40px; 
+    .photo{
+      margin-top: 60px;
+    }
+
+    .photo img{
+      max-width: 350px;
     }
   }
 
@@ -60,11 +66,11 @@
     .photo {
       margin-right: 0;
       margin-bottom: 20px;
+    }  
+
+    .photo img{
+      max-width: 250px;
     }
-    
-    .photo {
-        width: 225px;
-      }
 
     .about-me {
         flex: 1 1 300px;
