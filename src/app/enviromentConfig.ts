@@ -1,0 +1,2 @@
+export const environmentConfig = {
+    "projectId":"salajuegos-aa70a","appId":"1:111718902849:web:72d7220f676705936f6ac0","storageBucket":"salajuegos-aa70a.appspot.com","apiKey":"AIzaSyApSt0GAwFsnafao68eO2eRRq31EeUgLEY","authDomain":"salajuegos-aa70a.firebaseapp.com","messagingSenderId":"111718902849"};

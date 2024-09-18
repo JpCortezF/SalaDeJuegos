@@ -1,78 +1,104 @@
 .container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    min-height: calc(100vh - 200px);
-    padding: 20px;
-    gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 200px);
+  padding: 20px;
+  gap: 20px;
+  padding-top: 80px; /* Añadir un padding superior para evitar el solapamiento con el header */
+  padding-bottom: 40px; /* Añadir padding inferior */
 }
 
-.photo{
-    margin-right: 20px;
+.photo {
+  margin-right: 20px;
 }
 
 .photo img {
-    border-radius: 50%;
-    max-width: 430px;
+  border-radius: 50%;
+  max-width: 430px;
+  height: auto;
+}
+
+.about-me {
+  background-color: rgb(228, 228, 228);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  flex: 1 1 500px;
+  max-width: 700px;
+  min-height: 450px;
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  max-width: 600px;
+}
+
+.headline {
+  font-size: 36px;
+}
+
+.headline-game {
+  color: rgb(156, 163, 175);
+}
+
+.content p {
+  color: black;
+}
+
+@media (max-width: 1200px) {
+  .photo {
+    margin-top: 60px;
+  }
+
+  .photo img {
+    max-width: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
     height: auto;
+    padding: 10px;
+  }
+
+  .photo {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .photo img {
+    max-width: 250px;
   }
 
   .about-me {
-    background-color: rgb(228, 228, 228);
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    flex: 1 1 500px;
-    max-width: 700px;
-    min-height: 450px;
-    display: flex;
-    justify-content: center;
+    flex: 1 1 100%;
+    max-width: 100%;
+    padding: 10px;
   }
 
   .content {
-    max-width: 600px;
-  }
-  
-  .headline{
-    font-size: 36px;
+    max-width: 100%;
   }
 
-  .headline-game{
-    color: rgb(156 163 175);
+  .headline {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .headline {
+    font-size: 22px;
   }
 
-  .content p{
-    color: black;
+  .photo img {
+    max-width: 200px;
   }
 
-
-  @media (max-width: 1200px){
-    .photo{
-      margin-top: 60px;
-    }
-
-    .photo img{
-      max-width: 350px;
-    }
+  .about-me {
+    padding: 5px;
   }
-
-  @media (max-width: 768px) {
-    .container {
-      flex-direction: column;
-      height: auto; 
-    }
-  
-    .photo {
-      margin-right: 0;
-      margin-bottom: 20px;
-    }  
-
-    .photo img{
-      max-width: 250px;
-    }
-
-    .about-me {
-        flex: 1 1 300px;
-    }
-  }
+}

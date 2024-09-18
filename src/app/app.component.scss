@@ -5,21 +5,31 @@
     margin-right: 1rem;
 }
 
-.btn-log-in{
+.btn-log-in,
+.btn-log-out{
     background: transparent;
     border: 0;
     color: white;
 }
 
-.route-about-me a{
-    color: #dc3545;
-    text-decoration: none;
+.icon-footer{
+    padding: 0.8rem;
+    font-size: 1.5rem;
 }
 
-.conteiner a{
+p{
+    margin: 0;
+    color: #d13d49;
+}
+
+p:hover{
+    color: rgb(156 163 175);
+}
+
+a{
     color: white;
     text-decoration: none;
-  }
+}
   
 .Copyright{
     color: rgb(156 163 175);
