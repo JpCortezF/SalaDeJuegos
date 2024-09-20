@@ -32,22 +32,30 @@
   justify-content: center;
 }
 
-.content {
-  max-width: 600px;
+.content{
+  .headline {
+    font-size: 36px;
+  }
+  .headline-game {
+    color: rgb(156, 163, 175);
+  }
+  
+  p{
+    color: black;
+    margin: 0;
+  }
 }
 
-.headline {
-  font-size: 36px;
+.reach-me{
+  padding: 10px;
+  img{
+    width: 33px;
+    margin-right: 5px;
+  }
+  a{
+    text-decoration: none;
+  }
 }
-
-.headline-game {
-  color: rgb(156, 163, 175);
-}
-
-.content p {
-  color: black;
-}
-
 @media (max-width: 1200px) {
   .photo {
     margin-top: 60px;

@@ -1,18 +1,35 @@
 <div class="container">
-  <a class="photo-game" href="#">
+  <a class="photo-game">
     <img src="preguntados.webp" alt="">
     <h3>Preguntados</h3>
   </a>
-  <a class="photo-game" href="#">
+  <a class="photo-game">
     <img src="ahorcado.webp" alt="">
     <h3>Ahorcado</h3>
   </a>
-  <a class="photo-game" href="#">
+  <a class="photo-game">
     <img src="mayor-menor.webp" alt="">
     <h3>Mayor o menor</h3>
   </a> 
-  <a class="photo-game" href="#">
+  <a class="photo-game">
     <img src="buscaminas.png" alt="">
     <h3>Buscaminas</h3>
   </a>
 </div>
+<div class="icon-chat">
+  <button id="chatIcon" (click)="ToggleChat()"><img src="icon-page.png" alt=""></button>
+</div>
+@if(isChatVisible){
+  <div class="chat-box">
+    <div class="close-chat">
+      <button [class.hidden]="!isChatVisible" (click)="ToggleChat()"><i class="bi bi-caret-down-fill"></i></button>
+    </div>
+    <div class="chat">
+      <p>Hola!</p>
+    </div>
+    <div class="input-chat">
+      <input type="text" placeholder="Mensaje">
+      <span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
+    </div>
+  </div>
+}
