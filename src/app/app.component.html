@@ -1,41 +1,5 @@
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top p-3" style="background-color: #151f2e; padding: 0;">
-      <div class="container">
-        <a routerLink="/home" routerLinkActive="active-route"><img class="icon-page" src="icon-page.png" alt="icon-page"></a>
-        <a routerLink="/home" routerLinkActive="active-route" class="navbar-brand">Bushin</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-start"
-          aria-controls="navbar-start" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbar-start">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 nav-icons">
-            @if(userLogged){
-              <li>
-                <button class="btn-log-out" (click)="logOut()"><a class="dropdown-item">Log out</a></button>
-              </li>
-            }
-            @if(!userLogged){
-              <li>
-                <button class="btn-log-in"><a routerLink="/log-in" routerLinkActive="active-route" class="dropdown-item">Acceder</a></button>
-              </li>
-            }
-          </ul>        
-        </div>
-      </div>
-    </nav>
-  </header>
+<app-navbar></app-navbar>
   
 <router-outlet/>
 
-<footer>
-    <div class="container">
-      <div class="about-me">
-        <a routerLink="/about-me" routerLinkActive="active-route"><p>¿Quien soy?</p></a>
-      </div>  
-      <div class="icon-footer">
-        <a routerLink="/home" routerLinkActive="active-route"><img class="icon-page" src="icon-page.png" alt="icon-page"></a>
-        <a routerLink="/home" routerLinkActive="active-route">Bushin</a>
-      </div>
-      <p class="Copyright">Copyright &copy; 2024 Bushin®. All rights reserved.</p>
-    </div>
-</footer>
+<app-footer></app-footer>

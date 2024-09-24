@@ -38,16 +38,16 @@ body {
 app-root {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Mínimo 100% de la altura de la ventana */
+  min-height: 100vh;
 }
 
 router-outlet {
-  flex-grow: 1; /* Hacemos que el contenido ocupe el espacio disponible */
+  flex-grow: 1;
 }
 
 footer {
-  background-color: #151f2e; /* Ejemplo de color para el fondo del footer */
-  color: white; /* Ejemplo de color para el texto */
+  background-color: #151f2e;
+  color: white;
   text-align: center;
   padding: 1rem;
 }

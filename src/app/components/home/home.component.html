@@ -22,14 +22,35 @@
 @if(isChatVisible){
   <div class="chat-box">
     <div class="close-chat">
-      <button [class.hidden]="!isChatVisible" (click)="ToggleChat()"><i class="bi bi-caret-down-fill"></i></button>
+      <button [class.hidden]="!isChatVisible" (click)="ToggleChat()">
+        <i class="bi bi-caret-down-fill"></i>
+      </button>
     </div>
     <div class="chat">
-      <p>Hola!</p>
-    </div>
+      <div *ngFor="let message of messages" 
+           [ngClass]="{'user-message': message.user !== userEmail, 'my-message': message.user === userEmail}">
+        <div class="message-header">
+          {{ GetUserName(message.user) }}
+        </div>
+        <div class="message-body">
+          {{ message.text }}
+        </div>
+        <div class="message-footer">
+          {{ FormatTime(message.fecha) }}
+        </div>
+      </div>
+    </div> 
     <div class="input-chat">
-      <input type="text" placeholder="Mensaje">
-      <span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
+      <textarea 
+        placeholder="Mensaje" 
+        [(ngModel)]="newMessage" 
+        (keydown.enter)="SendMessage()"
+        (input)="AdjustTextarea($event)" 
+        [style.height]="textareaHeight">
+      </textarea>
+      <span class="input-group-text send_btn" (click)="SendMessage()">
+        <i class="fas fa-location-arrow"></i>
+      </span>
     </div>
   </div>
 }

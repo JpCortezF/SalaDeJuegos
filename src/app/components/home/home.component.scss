@@ -105,19 +105,75 @@ h3 {
   padding: 10px;
   overflow-y: auto;
   border-bottom: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+
+  p {
+    max-width: 350px;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    display: inline-block;
+  }
+
+  .user-message {
+    background-color: rgb(119, 181, 119);
+    text-align: left;
+    align-self: flex-start;
+    border-radius: 10px;
+    padding: 5px;
+    margin-bottom: 5px;
+  }
+
+  .my-message {
+    background-color: rgb(79, 181, 219);
+    align-self: flex-end;
+    margin-left: auto;
+    border-radius: 10px;
+    padding: 5px;
+    margin-bottom: 5px;
+  }
+
+  .message-header {
+    font-size: 0.8em;
+    font-weight: bold;
+    margin: 0;
+  }
+  .user-message .message-header {
+    text-align: left;
+  }
+  .my-message .message-header {
+    text-align: right;
+  }
+  .message-footer {
+    font-size: 0.7em;
+    text-align: right;
+    margin: 0;
+  }
 }
 
 .input-chat {
-  padding: 10px;
-  background-color: #f9f9f9;
-  border-top: 1px solid #ccc;
   display: flex;
-  input {
-    width: 90%;
+  align-items: center;
+  padding: 5px;
+  textarea {
+    flex: 1;
+    resize: none;
     padding: 10px;
+    border-radius: 5px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-right: 10px;
+    font-size: 1rem;
+    overflow-y: auto;
+    min-height: 40px;
+    max-height: 120px;
+  }
+
+  .send_btn {
+    margin-left: 10px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
   }
 }
 
@@ -130,14 +186,7 @@ h3 {
   display: none;
 }
 
-
-@media (max-width: 768px) {
-  .container {
-    padding-top: 6.25rem;
-  }
-}
-
-@media (max-width: 487px){
+@media (max-width: 992px){
   .icon-chat {
     button{
       bottom: 24px;
@@ -147,5 +196,11 @@ h3 {
   .chat-box{
     bottom: 10px;
     right: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-top: 6.25rem;
   }
 }

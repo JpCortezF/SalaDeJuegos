@@ -3,19 +3,19 @@ import { Component } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@angular/fire/auth';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-log-in',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './log-in.component.html',
-  styleUrl: './log-in.component.scss'
+  styleUrls: ['./log-in.component.scss']
 })
 export class LogInComponent {
   newUserMail: string = "";
   newUserPass: string = "";
 
-  userLogged: string = "";
   flagError: boolean = false;
   messageError: string = "";
 
@@ -23,7 +23,7 @@ export class LogInComponent {
   userPass: string = "";
   isRegistering = false;
 
-  constructor(public auth: Auth, private router: Router) {}
+  constructor(public auth: Auth, private router: Router, private userService: UserService) {}
 
   ToggleForm() {
     this.isRegistering = !this.isRegistering;
@@ -48,7 +48,8 @@ export class LogInComponent {
   Register(){
     createUserWithEmailAndPassword(this.auth,this.newUserMail, this.newUserPass).then((res) =>{
       if(res.user.email !== null) {
-        this.userLogged = res.user.email;
+        this.userService.setUserEmail(res.user.email);
+
         this.router.navigate(['/home']);
       }
     }).catch((e) =>{
@@ -73,7 +74,7 @@ export class LogInComponent {
   Login() {
     signInWithEmailAndPassword(this.auth, this.userMail, this.userPass).then((res) => {
       if (res.user.email !== null) {
-        this.userLogged = res.user.email;
+        this.userService.setUserEmail(res.user.email);
         this.router.navigate(['/home']);
       }
     }).catch((e) => {
