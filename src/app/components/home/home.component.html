@@ -3,12 +3,12 @@
     <img src="preguntados.webp" alt="">
     <h3>Preguntados</h3>
   </a>
-  <a class="photo-game">
-    <img src="ahorcado.webp" alt="">
+  <a class="photo-game" routerLink="/juegos/ahorcado" routerLinkActive="active-route">
+    <img src="ahorcado.webp" alt="ahorcado">
     <h3>Ahorcado</h3>
   </a>
-  <a class="photo-game">
-    <img src="mayor-menor.webp" alt="">
+  <a class="photo-game" routerLink="/juegos/mayor-menor" routerLinkActive="active-route">
+    <img src="mayor-menor.webp" alt="mayor-menor">
     <h3>Mayor o menor</h3>
   </a> 
   <a class="photo-game">
@@ -27,19 +27,27 @@
       </button>
     </div>
     <div class="chat">
-      <div *ngFor="let message of messages" 
-           [ngClass]="{'user-message': message.user !== userEmail, 'my-message': message.user === userEmail}">
-        <div class="message-header">
-          {{ GetUserName(message.user) }}
-        </div>
-        <div class="message-body">
-          {{ message.text }}
-        </div>
-        <div class="message-footer">
-          {{ FormatTime(message.fecha) }}
-        </div>
+      <div *ngFor="let message of messages; let i = index"> 
+        
+        @if(IsNewDay(i)){
+          <div class="date-separator">
+            {{ FormatDate(message.fecha) }}
+          </div>        
+        }
+        <div [ngClass]="{'user-message': message.user !== userEmail, 'my-message': message.user === userEmail}">         
+          <div class="message-header">
+            {{ GetUserName(message.user) }}
+          </div>
+          <div class="message-body">
+            {{ message.text }}
+          </div>
+          <div class="message-footer">
+            {{ FormatTime(message.fecha) }}
+          </div>
+        </div>        
       </div>
-    </div> 
+    </div>
+
     <div class="input-chat">
       <textarea 
         placeholder="Mensaje" 

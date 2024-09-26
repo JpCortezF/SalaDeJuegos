@@ -2,29 +2,32 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { addDoc, collection, collectionData, Firestore, where, orderBy, limit, query, doc, setDoc } from '@angular/fire/firestore';
+import { Auth } from '@angular/fire/auth';
 import { Subscription } from 'rxjs';
 import { UserService } from '../../services/user.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+  lastDate: string | null = null;
   isChatVisible = false;
   messages: any[] = [];
   newMessage = '';
-
+  
   textareaHeight = 'auto';
   private readonly maxRows = 4;
-
+  
   public userEmail: string | null = "";
   private sub!: Subscription;
 
-  constructor(private firestore: Firestore, private userService: UserService) {
-    this.userEmail = this.userService.getUserEmail();
+  constructor(private firestore: Firestore, private userService: UserService, public auth: Auth) {
+    //this.userEmail = this.userService.getUserEmail();
   }
 
   
@@ -36,10 +39,15 @@ export class HomeComponent {
   }
 
   ngOnInit() {
-    this.userEmail = this.userService.getUserEmail();
-    if (this.userEmail) {
-      this.GetData();
-    }
+    //this.userEmail = this.userService.getUserEmail();
+    this.auth.onAuthStateChanged((auth)=>{
+      if(auth?.email){
+        this.GetData();
+        this.userEmail = auth?.email;
+      }else{
+        this.userEmail = null;
+      }
+    })    
   }
 
   ToggleChat() {
@@ -51,29 +59,31 @@ export class HomeComponent {
   }
 
   SendMessage() {
-    if (this.newMessage.trim() !== '') {
-      const message = { 
-        text: this.newMessage.trim(), 
-        user: this.userEmail, 
-        fecha: new Date()
-      };
-      
-      const col = collection(this.firestore, 'chats');
-      addDoc(col, message).then(() => {
-        this.newMessage = '';
-        this.ScrollToBottom();
-      });
-      this.textareaHeight = 'auto';
-    }
+    if(this.userEmail !== null){
+      if (this.newMessage.trim() !== '') {
+        const message = { 
+          text: this.newMessage.trim(), 
+          user: this.userEmail, 
+          fecha: new Date()
+        };
+        
+        const col = collection(this.firestore, 'chats');
+        addDoc(col, message).then(() => {
+          this.newMessage = '';
+          this.ScrollToBottom();
+        });
+        this.textareaHeight = 'auto';
+      }
+    }  
   }
 
   GetData(){
     const col = collection(this.firestore, 'chats');
     const q = query(col, orderBy('fecha'));
-    console.log(this.userEmail);
 
     const observable = collectionData(q);
     this.sub = observable.subscribe((messages: any) => {
+      this.lastDate = null;
       this.messages = messages;
       this.ScrollToBottom();
     });
@@ -96,6 +106,32 @@ export class HomeComponent {
       return d.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
     }
     return '';
+  }
+
+  FormatDate(date: any): string {
+    if (date && date.toDate) {
+      const d = date.toDate();
+      return d.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    }
+    return '';
+  }
+
+  IsNewDay(index: number): boolean {
+    if (index === 0) {
+      // Siempre mostrar la fecha en el primer mensaje
+      this.lastDate = this.FormatDate(this.messages[index].fecha);
+      return true;
+    }
+    
+    const currentMessageDate = this.FormatDate(this.messages[index].fecha);
+    const previousMessageDate = this.FormatDate(this.messages[index - 1].fecha);
+    
+    if (currentMessageDate !== previousMessageDate) {
+      this.lastDate = currentMessageDate;
+      return true;
+    }
+    
+    return false;
   }
 
   ngOnDestroy() {

@@ -9,6 +9,11 @@ export const routes: Routes = [
     {path: 'home', component: HomeComponent},
     {path: 'log-in', component: LogInComponent},
     {path: 'about-me', component: AboutMeComponent},
+    {
+        path: 'juegos',
+        loadChildren: () =>
+          import('./modules/juegos/juegos.module').then((m) => m.JuegosModule),
+    },    
     // La ruta comodin debe ir siempre al final
     { path: '**', component: PageNotFoundComponent},
 ];
