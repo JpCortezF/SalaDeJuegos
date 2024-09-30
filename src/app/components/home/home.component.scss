@@ -31,6 +31,7 @@ h3 {
 .photo-game img{
   border-radius: 15px;
   width: 200px;
+  height: 200px;
   transition: all 0.3s ease;
 }
 
@@ -215,5 +216,8 @@ h3 {
 @media (max-width: 768px) {
   .container {
     padding-top: 6.25rem;
+  }
+  .chat-box{
+    width: 300px;
   }
 }

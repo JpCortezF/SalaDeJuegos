@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { addDoc, collection, collectionData, Firestore, where, orderBy, limit, query, doc, setDoc } from '@angular/fire/firestore';
 import { Auth } from '@angular/fire/auth';
@@ -14,7 +14,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
   lastDate: string | null = null;
   isChatVisible = false;
   messages: any[] = [];
@@ -30,7 +30,6 @@ export class HomeComponent {
     //this.userEmail = this.userService.getUserEmail();
   }
 
-  
   AdjustTextarea(event: Event): void {
     const textarea = event.target as HTMLTextAreaElement;
     textarea.style.height = 'auto';
@@ -74,7 +73,7 @@ export class HomeComponent {
         });
         this.textareaHeight = 'auto';
       }
-    }  
+    }
   }
 
   GetData(){

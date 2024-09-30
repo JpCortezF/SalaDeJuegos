@@ -1,1 +1,40 @@
-<p style="color: white;">ahorcado works!</p>
+<div class="container">
+    <div class="board-game rounded shadow-lg">
+        <h1 class="text-center mb-4">{{encabezado}}</h1>
+        @if(!palabraActual){
+            <div class="img-game" style="display: flex; justify-content: center;">
+                <img src="assets/8.png" alt="Juego del ahorcado">
+            </div>
+            <div class="btn-start">
+                <button class="btn btn-success" (click)="NuevoJuego()">
+                  <i class="bi bi-caret-right-square"><p>Comenzar</p></i>
+                </button>
+            </div>
+        }@else {
+            <div class="game">
+                <div class="img-game">
+                    <img [src]="'assets/' + intento + '.png'">
+                </div>
+                <div class="word-to-guess">
+                    <h3>{{ palabraOculta }}</h3>
+                </div>
+            </div>    
+            <div class="keyboard">
+                <button *ngFor="let letra of letras"
+                    class="btn btn-success m-1"
+                    [ngClass]="{'disabled-btn': usadas.includes(letra)}" 
+                    [disabled]="gameOver || usadas.includes(letra)"
+                    (click)="TecladoLetras(letra)">
+                    {{letra}}
+                </button>
+            </div>
+        }
+        @if(gameOver){
+            <div class="btn-start">
+                <button class="btn btn-warning" (click)="NuevoJuego()">
+                    <i class="bi bi-arrow-repeat"><p>Reiniciar</p></i>
+                </button>
+            </div>          
+        }
+    </div>
+</div>

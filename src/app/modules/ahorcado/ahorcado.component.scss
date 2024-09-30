@@ -1,0 +1,64 @@
+.container {
+    width: 100%;
+    min-height: calc(100vh - 200px);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.board-game {
+    border: 2px solid #aeaeae;
+    background-color: #fff;
+    padding: 2.5rem;
+    width: 1000px;
+    margin-top: 5rem;
+    
+    .game{
+        display: flex;
+        border: 2px solid #aeaeae;
+        padding: 1rem;
+        margin-bottom: 1rem;
+
+        .word-to-guess{
+            display: flex;
+            align-items: end;
+            margin-left: 2rem;
+            h3{
+                margin: 0;
+            }
+        }
+        .disabled-btn {
+            background-color: #d3d3d3;
+            cursor: not-allowed;       // Cambia el cursor para indicar que no es clickeable
+            color: #fff;
+            border-color: #ccc;
+        }
+    }
+    
+    img{
+        height: 170px;
+    }
+    .btn-start{
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+    }
+
+
+    button p{
+        display: inline;
+        margin-left: 0.5rem;
+    }
+}
+
+@media (max-width: 575px){
+
+    .board-game{
+        padding: 1rem;
+    }
+
+    .img-game img{
+        height: 100px;
+    }
+}

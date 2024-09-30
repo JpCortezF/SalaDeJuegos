@@ -1,1 +1,40 @@
-<p style="color: white;">mayor-menor works!</p>
+<div class="container text-center mt-5">
+  <div class="board-game rounded shadow-lg">
+    <h1 class="text-white mb-4">{{encabezado}}</h1>
+    @if(currentCardUrl){
+      <div class="cards-area">
+          <img [src]="currentCardUrl" class="card" alt="Carta actual" style="max-height: 100%; max-width: 100%;">
+          @if(!gameOver){
+            <div class="b-high-low">
+              <button class="btn btn-success mt-4" (click)="GuessMayor()">
+                <i class="bi bi-caret-up-fill mr-2"><p>Mayor</p></i>
+              </button>
+              <button class="btn btn-danger mt-4" (click)="GuessMenor()">
+                <i class="bi bi-caret-down-fill mr-2"><p>Menor</p></i>
+              </button>       
+            </div>
+            <div>
+              <h3 class="points-msg text-white">Puntos acumulados: {{ puntos }}</h3>
+            </div> 
+          }@else {
+            <div>
+              <h3 class="points-msg text-white">Puntos acumulados: {{ puntos }}</h3>
+              <button class="btn btn-warning mt-4" (click)="RestartGame()">
+                <i class="bi bi-arrow-repeat"><p>Reiniciar</p></i>
+              </button>
+            </div>
+          }     
+      </div>
+    }
+    @else {
+      <div class="cards-area">
+        <img src="assets/mayor-menor.jpg" class="mazo" alt="Mazo-cartas" style="max-height: 100%; max-width: 100%;">
+      </div>
+      <div class="btn-start">
+        <button class="btn btn-success" (click)="StartGame()">
+          <i class="bi bi-caret-right-square"><p>Comenzar</p></i>
+        </button>
+      </div>    
+    }
+  </div>
+</div>

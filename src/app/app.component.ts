@@ -13,23 +13,5 @@ import { FooterComponent } from "./components/footer/footer.component";
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  // title = 'sala_juegos';
-  // userLogged: boolean = false;
 
-  // constructor(private auth: Auth, private router: Router) {
-  //   this.auth.onAuthStateChanged((user) => {
-  //     if (user) {
-  //       this.userLogged = true;
-  //     } else {
-  //       this.userLogged = false;
-  //     }
-  //   });
-  // }
-
-  // logOut() {
-  //   this.auth.signOut().then(() => {
-  //     this.userLogged = false;
-  //     this.router.navigate(['/log-in']);
-  //   });
-  // }
 }
