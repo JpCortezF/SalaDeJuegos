@@ -1,21 +1,22 @@
 <div class="container text-center mt-5">
-  <div class="board-game rounded shadow-lg">
+  <div class="board-game rounded shadow-lg" style="background-image: url(assets/mesa-cartas.jpg);">
     <h1 class="text-white mb-4">{{encabezado}}</h1>
     @if(currentCardUrl){
       <div class="cards-area">
           <img [src]="currentCardUrl" class="card" alt="Carta actual" style="max-height: 100%; max-width: 100%;">
           @if(!gameOver){
-            <div class="b-high-low">
-              <button class="btn btn-success mt-4" (click)="GuessMayor()">
-                <i class="bi bi-caret-up-fill mr-2"><p>Mayor</p></i>
-              </button>
-              <button class="btn btn-danger mt-4" (click)="GuessMenor()">
-                <i class="bi bi-caret-down-fill mr-2"><p>Menor</p></i>
-              </button>       
-            </div>
-            <div>
-              <h3 class="points-msg text-white">Puntos acumulados: {{ puntos }}</h3>
-            </div> 
+              <div class="b-high-low">
+                <button class="btn btn-success mt-4" (click)="GuessMayor()">
+                  <i class="bi bi-caret-up-fill mr-2"><p>Mayor</p></i>
+                </button>
+                <button class="btn btn-danger mt-4" (click)="GuessMenor()">
+                  <i class="bi bi-caret-down-fill mr-2"><p>Menor</p></i>
+                </button>       
+              </div>
+              <!-- <div>
+                <h3 class="points-msg text-white">Puntos acumulados: {{ puntos }}</h3>
+              </div>  -->
+                     
           }@else {
             <div>
               <h3 class="points-msg text-white">Puntos acumulados: {{ puntos }}</h3>
@@ -25,6 +26,11 @@
             </div>
           }     
       </div>
+      @if(!gameOver){
+        <div>
+          <h3 class="points-msg text-white">Puntos acumulados: {{ puntos }}</h3>
+        </div>
+      }    
     }
     @else {
       <div class="cards-area">

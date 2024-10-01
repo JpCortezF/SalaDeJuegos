@@ -9,7 +9,9 @@
 
 .board-game {
     border: 2px solid #fff;
-    background-color: #2e3f33;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     padding: 2.5rem;
     width: 800px;
     margin-top: 3rem;
@@ -52,6 +54,10 @@ button p{
 @media (max-width: 440px){
     .board-game{
         padding: 1rem;
+
+        .points-msg{
+            margin-top: 0.8rem;
+        }
     }
     .b-high-low{
         p{

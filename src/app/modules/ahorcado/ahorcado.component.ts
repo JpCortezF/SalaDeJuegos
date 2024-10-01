@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-ahorcado',
   standalone: false,
-  //imports: [],
   templateUrl: './ahorcado.component.html',
   styleUrl: './ahorcado.component.scss'
 })
@@ -18,11 +17,7 @@ export class AhorcadoComponent implements OnInit{
   puntaje = 0;
   gameOver: boolean = false;
 
-  letras = [
-    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 
-    'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
-    'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
-  ];
+  letras: string[] = [];
   usadas: string[] = [];
 
   constructor(public auth: Auth, private router: Router){}

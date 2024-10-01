@@ -63,7 +63,6 @@ export class MayorMenorComponent implements OnInit {
     this.currentCardUrl = this.imageUrls[randomCard] || null;
     this.currentCard = randomCard;
     this.cartas.splice(randomIndex, 1); // Eliminar la carta para que no se repita
-    console.log(this.cartas.length);
   }
 
   GuessMayor(): void {
@@ -108,6 +107,7 @@ export class MayorMenorComponent implements OnInit {
       '1basto', '2basto', '3basto', '4basto', '5basto', '6basto', '7basto', '8basto', '9basto', '10basto'
     ];
 
+    this.encabezado = "Juego Mayor-Menor";
     this.cartas = cartasCopia;
     this.currentCardUrl = null;
     this.puntos = 0;
