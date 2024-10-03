@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { QuizContestService } from '../../services/quiz-contest.service';
 import { Router } from '@angular/router';
 import { Auth } from '@angular/fire/auth';
+import Swal from 'sweetalert2'; 
 
 @Component({
   selector: 'app-preguntados',
@@ -16,6 +17,7 @@ export class PreguntadosComponent implements OnInit{
   allAnswers: string[] = [];
   correctAnswer: string = '';
   remainingLives: number = 3;
+  score: number = 0;
   timeLeft: number = 30;
   currentQuestionIndex: number = 0;
   questions: any[] = [];
@@ -44,10 +46,10 @@ export class PreguntadosComponent implements OnInit{
   }
 
   LoadQuestions(): void {
-    let page = Math.floor(Math.random() * 3) + 1;
+    let page = Math.floor(Math.random() * 2) + 1;
     let randomCategory = this.categories[Math.floor(Math.random() * this.categories.length)];
-
-    this.quizService.getQuestions(1, page, randomCategory, 'multiple').subscribe({
+    
+    this.quizService.getQuestions(15, page, randomCategory, 'multiple').subscribe({
       next: (data) => {
         if (data && data.questions.length > 0) {
           this.questions = data.questions;
@@ -55,7 +57,6 @@ export class PreguntadosComponent implements OnInit{
         }else {
           console.error('La respuesta de la API no contiene preguntas.');
         }
-        console.log(this.questions);
       },
       error: (error) => {
         console.error('Error al obtener las preguntas:', error);
@@ -65,9 +66,11 @@ export class PreguntadosComponent implements OnInit{
 
   LoadNextQuestion(): void {
       if(this.questions.length > 0){
+        let index = Math.floor(Math.random() * this.questions.length);
         this.showNextButton = false;
-        this.isAnswered = false; 
-        this.currentQuestion = this.questions[0];
+        this.isAnswered = false;
+        this.currentQuestion = this.questions[index];
+        console.log(this.currentQuestion.correctAnswers);
         switch(this.currentQuestion.category)
         {
           case 'geography':
@@ -100,20 +103,43 @@ export class PreguntadosComponent implements OnInit{
 
     if (selectedAnswer === this.correctAnswer) {
       this.showNextButton = true;
+      this.score++;
     } else {
       this.showNextButton = true;
-      this.remainingLives--;    
+      this.remainingLives--;
+
+      if(this.remainingLives == 0){
+        this.showGameOverAlert();
+      }
     }
   }
 
   resetGame(): void {
     this.currentQuestionIndex = 0;
+    this.score = 0;
     this.remainingLives = 3;
     this.LoadQuestions();
   }
 
-  // Función para mezclar las respuestas
   shuffle(array: any[]): any[] {
     return array.sort(() => Math.random() - 0.5);
+  }
+
+  showGameOverAlert(): void {
+    Swal.fire({
+      title: '¡Te quedaste sin vidas!',
+      text: "¿Quieres reiniciar el juego o salir?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Reiniciar',
+      cancelButtonText: 'Salir',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.resetGame();
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        this.router.navigate(['/']);
+      }
+    });
   }
 }

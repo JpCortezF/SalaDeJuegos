@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class AhorcadoComponent implements OnInit{
   encabezado = "";
-  palabras: string [] = ["Gabinete", "Componente", "Lapicero", "Enunciado", "Movida", "Diablo", "Cargador", "Lampara", "Artista", "Conjunto", "Campeon", "Galleta", "Microfono", "Internet", "Elegante", "Grabacion", "Escenario"];
+  palabras: string [] = ["Gabinete", "Componente", "Lapicero", "Enunciado", "Movida", "Diablo", "Cargador", "Lampara", "Artista", "Conjunto", "Campeon", "Galleta", "Microfono", "Internet", "Elegante", "Grabacion", "Escenario", "gato", "martillo", "canino", "mesa", "helicóptero", "elefante", "computadora", "ventana", "televisión"];
   palabraActual: string = "";
   palabraOculta: string = "";
   intento = 0;

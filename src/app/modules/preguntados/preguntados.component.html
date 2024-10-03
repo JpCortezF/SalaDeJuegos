@@ -25,16 +25,15 @@
         <div class="lives">
           <span><h4>{{ remainingLives }}</h4><i class="fa fa-heart" style="font-size:23px;color:red"></i></span>
         </div>
+        @if(!showNextButton){
+          <div class="score">
+            <h4>{{ score }} Puntos</h4>
+          </div>
+        }    
         @if(showNextButton){
-          @if(remainingLives == 0){
-            <div class="next-button">
-              <button (click)="resetGame()">Reiniciar</button>
-            </div>
-          }@else {
-            <div class="next-button">
-              <button (click)="LoadQuestions()">Siguiente pregunta</button>
-            </div>
-          }
+          <div class="next-button">
+            <button (click)="LoadQuestions()">Siguiente pregunta</button>
+          </div>
         }
       </div>
     </div>

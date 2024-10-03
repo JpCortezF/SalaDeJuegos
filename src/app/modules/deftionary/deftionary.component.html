@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="game-container">
+        <div class="trivia-container">
+            <div class="cloud">
+                <h2 [ngStyle]="{'color': definicionCorrecta ? '#28a745' : '#000'}">
+                    {{ encabezado }}
+                </h2>
+                @if(!definicionCorrecta){
+                    <h4 style="color: tomato;">{{ mensaje }}</h4>
+                }
+                <p>{{ definicion }}</p>
+            </div>
+            <div class="answer">
+                <input #inputPalabra type="text" placeholder="Adivina la palabra" (keydown.enter)="VerificarRespuesta(inputPalabra.value, inputPalabra)">
+                <button (click)="VerificarRespuesta(inputPalabra.value, inputPalabra)">
+                    {{ txtButton }}
+                </button>
+            </div>
+            <div class="vidas">
+                <p>{{ score }} Puntos</p>
+                <span *ngFor="let vida of [].constructor(remainingLives)">
+                    <i class="fa fa-heart" style="font-size:23px;color:red"></i>
+                </span>                          
+            </div>
+        </div>
+    </div>
+</div>
