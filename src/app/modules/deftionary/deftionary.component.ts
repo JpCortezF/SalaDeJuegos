@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 })
 export class DeftionaryComponent {
   encabezado = "";
+  juegoIniciado: boolean = false;
   palabras: string[] = [
     'gato', 'martillo', 'canino', 'mesa', 'helicóptero', 'elefante', 'computadora', 'ventana', 'televisión', 
     'ciudad', 'zapato', 'espejo', 'cámara', 'teléfono', 'piedra', 'camisa', 'ratón', 'teclado', 
@@ -30,6 +31,11 @@ export class DeftionaryComponent {
     this.GenerarPalabraAleatoria();
   }
 
+  IniciarJuego() {
+    this.juegoIniciado = true;
+    this.GenerarPalabraAleatoria();
+  }
+  
   GenerarPalabraAleatoria() {
     const indiceAleatorio = Math.floor(Math.random() * this.palabras.length);
     this.palabraElegida = this.palabras[indiceAleatorio];
