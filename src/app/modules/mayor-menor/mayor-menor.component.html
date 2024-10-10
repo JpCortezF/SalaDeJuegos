@@ -19,7 +19,7 @@
                      
           }@else {
             <div>
-              <h3 class="points-msg text-white">Puntos acumulados: {{ puntos }}</h3>
+              <h3 class="points-msg text-white">Puntos acumulados: {{ score }}</h3>
               <button class="btn btn-warning mt-4" (click)="RestartGame()">
                 <i class="bi bi-arrow-repeat"><p>Reiniciar</p></i>
               </button>
@@ -28,7 +28,7 @@
       </div>
       @if(!gameOver){
         <div>
-          <h3 class="points-msg text-white">Puntos acumulados: {{ puntos }}</h3>
+          <h3 class="points-msg text-white">Puntos acumulados: {{ score }}</h3>
         </div>
       }    
     }

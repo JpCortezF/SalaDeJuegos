@@ -26,9 +26,7 @@ export class HomeComponent implements OnInit{
   public userEmail: string | null = "";
   private sub!: Subscription;
 
-  constructor(private firestore: Firestore, private userService: UserService, public auth: Auth) {
-    //this.userEmail = this.userService.getUserEmail();
-  }
+  constructor(private firestore: Firestore, public auth: Auth) {}
 
   AdjustTextarea(event: Event): void {
     const textarea = event.target as HTMLTextAreaElement;
@@ -38,7 +36,6 @@ export class HomeComponent implements OnInit{
   }
 
   ngOnInit() {
-    //this.userEmail = this.userService.getUserEmail();
     this.auth.onAuthStateChanged((auth)=>{
       if(auth?.email){
         this.GetData();

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseStorageService } from '../../services/firebase-storage.service';
 import { Auth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
+import { Firestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-mayor-menor',
@@ -10,6 +12,8 @@ import { Router } from '@angular/router';
 })
 export class MayorMenorComponent implements OnInit {
   encabezado = "";
+  userEmail: string | null = "";
+  user: string = "";
   cartas: string[] = [
     '1oro', '2oro', '3oro', '4oro', '5oro', '6oro', '7oro', '8oro', '9oro', '10oro',
     '1copa', '2copa', '3copa', '4copa', '5copa', '6copa', '7copa', '8copa', '9copa', '10copa',
@@ -20,20 +24,18 @@ export class MayorMenorComponent implements OnInit {
   imageUrls: { [key: string]: string } = {};
   currentCardUrl: string | null = null;
   currentCard: string | null = null;
-  puntos: number = 0;
+  score: number = 0;
   gameOver: boolean = false;
 
-  constructor(private firebaseStorageService: FirebaseStorageService, public auth: Auth,   private router: Router) {}
+  constructor(private firebaseStorageService: FirebaseStorageService, private userService: UserService, private router: Router, private firestore: Firestore) {}
 
   ngOnInit(): void {
-    this.auth.onAuthStateChanged((auth)=>{
-      if(auth?.email){
-        this.LoadImages();
-        this.encabezado = "Juego Mayor-Menor";
-      }else{
-        this.router.navigate(['/log-in']);
-      }
-    })
+    this.userEmail = this.userService.userAuth();
+    if(this.userEmail){
+      this.LoadImages();
+      this.user = this.userEmail.split('@')[0];
+      console.log(this.user);
+    }
   }
 
   LoadImages(): void {
@@ -49,10 +51,10 @@ export class MayorMenorComponent implements OnInit {
   StartGame(): void {
     if (this.cartas.length === 0) {
       this.gameOver = true;
-      alert(`Juego terminado! Puntuación: ${this.puntos}`);
+      alert(`Juego terminado! Puntuación: ${this.score}`);
       return;
     }
-    this.puntos = 0;
+    this.score = 0;
     this.gameOver = false;
     this.GetRandomCard();
   }
@@ -72,10 +74,11 @@ export class MayorMenorComponent implements OnInit {
     this.GetRandomCard();
 
     if (this.CompareCards(this.currentCard!, previousCard) >= 0) {
-      this.puntos++;
+      this.score++;
     } else {
       this.gameOver = true;
       this.encabezado = "Perdiste!";
+      this.userService.SaveScoreToFirebase(this.user, this.score, 'listado_mayor-menor', this.firestore);
     }
   }
 
@@ -86,7 +89,7 @@ export class MayorMenorComponent implements OnInit {
     this.GetRandomCard();
 
     if (this.CompareCards(this.currentCard!, previousCard) <= 0) {
-      this.puntos++;
+      this.score++;
     } else {
       this.gameOver = true;
       this.encabezado = "Perdiste!";
@@ -110,7 +113,7 @@ export class MayorMenorComponent implements OnInit {
     this.encabezado = "Juego Mayor-Menor";
     this.cartas = cartasCopia;
     this.currentCardUrl = null;
-    this.puntos = 0;
+    this.score = 0;
     this.gameOver = false;
   }
 }

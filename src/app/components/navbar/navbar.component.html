@@ -15,8 +15,11 @@
                 @if(userEmail){
                     <li>
                         <p>{{userEmail}}</p>
-                    </li>
+                    </li>    
                 }
+                <li>
+                    <a routerLink="/ranking" routerLinkActive="active-route"><p>Ranking</p></a>
+                </li>
                 @if(userLogged){
                     <li>
                     <button class="btn-log-out" (click)="logOut()"><a class="dropdown-item">Log out</a></button>

@@ -1,0 +1,112 @@
+<div class="container">
+  <form (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md-12 mb-5">
+        <h2>Formulario de contacto</h2>
+      </div>
+    </div>
+    <div class="row formulario">
+      <!-- Nombre y apellido -->
+      <div class="col-md-6 mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <small class="invalid">*</small>
+        <input type="text" class="form-control" id="nombre" formControlName="nombre" placeholder="Ingrese nombre">
+        <div *ngIf="formulario.get('nombre')?.invalid && formulario.get('nombre')?.touched" class="invalid-feedback">
+          Nombre es requerido.
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="apellido" class="form-label">Apellido</label>
+        <small class="invalid">*</small>
+        <input type="text" class="form-control" id="apellido" formControlName="apellido" placeholder="Ingrese apellido">
+        <div *ngIf="formulario.get('apellido')?.invalid && formulario.get('apellido')?.touched" class="invalid-feedback">
+          Apellido es requerido.
+        </div>
+      </div>
+
+      <!-- Edad -->
+      <div class="col-md-6 mb-3">
+        <label for="edad" class="form-label">Edad</label>
+        <small class="invalid">*</small>
+        <input type="number" class="form-control" id="edad" formControlName="edad" placeholder="Ingrese edad">
+        <div *ngIf="formulario.get('edad')?.invalid && formulario.get('edad')?.touched" class="invalid-feedback">
+          Debe ser mayor de 18 años y menor de 99.
+        </div>
+      </div>
+
+      <!-- Número de teléfono -->
+      <div class="col-md-6 mb-3">
+        <label for="telefono" class="form-label">Teléfono</label>
+        <small class="invalid">*</small>
+        <input type="text" class="form-control" id="telefono" formControlName="telefono" placeholder="Ingrese teléfono">
+        <div *ngIf="formulario.get('telefono')?.invalid && formulario.get('telefono')?.touched" class="invalid-feedback">
+          Debe ingresar un número de teléfono válido (máximo 10 dígitos).
+        </div>
+      </div>
+
+      <!-- Sexo -->
+      <div class="col-md-6 mb-3">
+        <label for="sexo" class="form-label">Sexo</label>
+        <small class="invalid">*</small>
+        <select class="form-select" id="sexo" formControlName="sexo">
+          <option value="">Seleccione uno</option>
+          <option value="F">Femenino</option>
+          <option value="M">Masculino</option>
+        </select>
+        <div *ngIf="formulario.get('sexo')?.invalid && formulario.get('sexo')?.touched" class="invalid-feedback">
+          Debe seleccionar una opción.
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="col-md-6 mb-3">
+        <label for="email" class="form-label">Email</label>
+        <small class="invalid">*</small>
+        <input type="email" class="form-control" id="email" formControlName="email" placeholder="Ingrese email">
+        <div *ngIf="formulario.get('email')?.invalid && formulario.get('email')?.touched" class="invalid-feedback">
+          Debe ingresar un email válido.
+        </div>
+      </div>
+
+      <!-- Preguntas de la encuesta -->
+      <div class="col-md-12 mb-3">
+        <label for="pregunta1" class="form-label">¿Cómo te enteraste de nosotros?</label>
+        <input type="text" class="form-control" id="pregunta1" formControlName="pregunta1" placeholder="Responde aquí">
+        <div *ngIf="formulario.get('pregunta1')?.invalid && formulario.get('pregunta1')?.touched" class="invalid-feedback">
+          Esta pregunta es requerida.
+        </div>
+      </div>
+
+      <div class="col-md-12 mb-3">
+        <label for="satisfaccion" class="form-label">¿Qué tan satisfecho estás con el servicio?</label>
+        <select class="form-select" id="satisfaccion" formControlName="satisfaccion">
+          <option value="">Seleccione uno</option>
+          <option value="1">1 - Muy insatisfecho</option>
+          <option value="2">2 - Insatisfecho</option>
+          <option value="3">3 - Neutro</option>
+          <option value="4">4 - Satisfecho</option>
+          <option value="5">5 - Muy satisfecho</option>
+        </select>
+        <div *ngIf="formulario.get('satisfaccion')?.invalid && formulario.get('satisfaccion')?.touched" class="invalid-feedback">
+          Debe seleccionar una opción.
+        </div>
+      </div>
+    </div>
+
+    <!-- Términos y condiciones -->
+    <div class="row">
+      <div class="col-md-12 mb-5">
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="terminos" formControlName="terminos">
+          <label class="form-check-label" for="terminos">Aceptar términos y condiciones</label>
+        </div>
+        <div *ngIf="formulario.get('terminos')?.invalid && formulario.get('terminos')?.touched" class="invalid-feedback">
+          Debe aceptar los términos y condiciones.
+        </div>
+      </div>
+      <div class="col-md-12 d-grid gap-2">
+        <button type="submit" class="btn btn-primary btn-block" [disabled]="formulario.invalid">Aceptar</button>
+      </div>
+    </div>
+  </form>
+</div>

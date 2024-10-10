@@ -48,8 +48,7 @@ export class LogInComponent {
   Register(){
     createUserWithEmailAndPassword(this.auth,this.newUserMail, this.newUserPass).then((res) =>{
       if(res.user.email !== null) {
-        this.userService.setUserEmail(res.user.email);
-
+        this.userService.setUserEmail(this.userMail);
         this.router.navigate(['/home']);
       }
     }).catch((e) =>{
@@ -74,7 +73,7 @@ export class LogInComponent {
   Login() {
     signInWithEmailAndPassword(this.auth, this.userMail, this.userPass).then((res) => {
       if (res.user.email !== null) {
-        this.userService.setUserEmail(res.user.email);
+        this.userService.setUserEmail(this.userMail);
         this.router.navigate(['/home']);
       }
     }).catch((e) => {

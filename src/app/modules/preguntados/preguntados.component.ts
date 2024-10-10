@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { addDoc, collection, collectionData, Firestore, where, orderBy, limit, query, doc, setDoc } from '@angular/fire/firestore';
 import { QuizContestService } from '../../services/quiz-contest.service';
-import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
+import { Component, OnInit } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2'; 
 
 @Component({
@@ -24,6 +26,8 @@ export class PreguntadosComponent implements OnInit{
   showNextButton: boolean = false;
   selectedAnswer: string = '';
   isAnswered: boolean = false;
+  userEmail: string | null = "";
+  user: string = "";
 
   private categories = [
     'geography',
@@ -32,17 +36,14 @@ export class PreguntadosComponent implements OnInit{
     'entertainment'
   ]
 
-  constructor(public auth: Auth, private router: Router, private quizService: QuizContestService){}
+  constructor(private router: Router, private quizService: QuizContestService, private userService: UserService, private firestore: Firestore){}
 
   ngOnInit(): void {
-    this.auth.onAuthStateChanged((auth)=>{
-      if(auth?.email){
-        this.LoadQuestions();
-        this.encabezado = "Preguntados";
-      }else{
-        this.router.navigate(['/log-in']);
-      } 
-    })
+    this.userEmail = this.userService.userAuth();
+    if(this.userEmail){
+      this.LoadQuestions();
+      this.user = this.userEmail.split('@')[0];
+    }
   }
 
   LoadQuestions(): void {
@@ -109,8 +110,10 @@ export class PreguntadosComponent implements OnInit{
       this.remainingLives--;
 
       if(this.remainingLives == 0){
-        this.showGameOverAlert();
-      }
+        this.userService.SaveScoreToFirebase(this.user, this.score, 'listado_preguntados', this.firestore).then(() => {
+          this.showGameOverAlert();
+        });
+      }   
     }
   }
 
@@ -133,7 +136,9 @@ export class PreguntadosComponent implements OnInit{
       showCancelButton: true,
       confirmButtonText: 'Reiniciar',
       cancelButtonText: 'Salir',
-      reverseButtons: true
+      reverseButtons: true,
+      allowOutsideClick: false,
+      allowEscapeKey: false
     }).then((result) => {
       if (result.isConfirmed) {
         this.resetGame();

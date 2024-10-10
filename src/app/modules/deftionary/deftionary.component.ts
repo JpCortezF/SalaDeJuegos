@@ -1,14 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2'; 
+import { UserService } from '../../services/user.service';
+import { Firestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-deftionary',
   templateUrl: './deftionary.component.html',
   styleUrls: ['./deftionary.component.scss']
 })
-export class DeftionaryComponent {
+export class DeftionaryComponent implements OnInit{
   encabezado = "";
+  userEmail: string | null = "";
+  user: string = "";
   juegoIniciado: boolean = false;
   palabras: string[] = [
     'gato', 'martillo', 'canino', 'mesa', 'helicóptero', 'elefante', 'computadora', 'ventana', 'televisión', 
@@ -27,8 +31,14 @@ export class DeftionaryComponent {
   score: number = 0;
   txtButton = "";
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private userService: UserService, private firestore: Firestore) {
     this.GenerarPalabraAleatoria();
+  }
+
+  ngOnInit(): void {
+    this.userEmail = this.userService.userAuth();
+    if(this.userEmail)
+    this.user = this.userEmail.split('@')[0];
   }
 
   IniciarJuego() {
@@ -107,9 +117,9 @@ export class DeftionaryComponent {
         this.mensaje = 'La palabra era ' + this.palabraElegida;
         this.txtButton = "Siguiente palabra";
         if (this.remainingLives == 0) {
-          this.mostrarMensajePerdida(inputElement);
-          this.remainingLives = 3;
-          this.score = 0;
+          this.userService.SaveScoreToFirebase(this.user, this.score, 'listado_deftionary', this.firestore).then(() => {
+            this.mostrarMensajePerdida(inputElement);
+          });
         }
       }
     }    

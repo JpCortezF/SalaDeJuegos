@@ -1,5 +1,5 @@
 .icon-footer{
-    padding: 0.8rem;
+    padding: 0.5rem;
     font-size: 1.5rem;
     img{
         width: 36px;
@@ -8,15 +8,16 @@
     }
 }
 
-p{
-    margin: 0;
-    color: #d13d49;
-    text-align: center;
-    display: inline;
-}
-
-p:hover{
-    color: rgb(156 163 175);
+.about-me{
+    p{
+        color: #d13d49;
+        text-align: center;
+        display: inline;
+    }
+    p:hover{
+        color: rgb(156 163 175);
+    }
+    
 }
 
 a{
@@ -24,6 +25,17 @@ a{
     text-decoration: none;
 }
   
-.Copyright{
+p{
     color: rgb(156 163 175);
+    margin: 0;
+}
+
+.Encuesta{
+    p{
+        margin-bottom: 0.8rem;
+    }
+    p:hover{
+        color: #d13d49;
+        cursor: pointer;
+    }
 }

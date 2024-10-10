@@ -4,13 +4,13 @@
             <div class="cloud">
                 @if(!juegoIniciado){
                     <div class="start-container">
-                        <button (click)="IniciarJuego()">Iniciar Juego</button>
                         <p>
                           <strong>Explicación del juego</strong><br>
                           🕹️: Deftionary es un juego sobre acertar la palabra según el significado que sale en pantalla. 
                           Se cuenta con 3 vidas para alcanzar el mayor puntaje posible, los puntos se van logrando con 
                           cada palabra acertada.
                         </p>
+                        <button (click)="IniciarJuego()">Iniciar Juego</button>
                     </div>
                 }@else {
                     <h2 [ngStyle]="{'color': definicionCorrecta ? '#28a745' : '#000'}">
@@ -27,8 +27,8 @@
                             {{ txtButton }}
                         </button>
                     </div>
+                    <p>{{ score }} Puntos</p>
                     <div class="vidas">
-                        <p>{{ score }} Puntos</p>
                         <span *ngFor="let vida of [].constructor(remainingLives)">
                             <i class="fa fa-heart" style="font-size:23px;color:red"></i>
                         </span>                          
