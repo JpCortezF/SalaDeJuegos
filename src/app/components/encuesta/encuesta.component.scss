@@ -1,12 +1,40 @@
 .container {
-    max-width: 600px;
-    padding: 40px;
+    width: 100%;
+    min-height: calc(100vh - 200px);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 25px;
     margin-top: 7rem;
-    /* SHADOW */
-    -webkit-box-shadow: 1px 1px 31px -5px rgba(0,0,0,0.75);
-    -moz-box-shadow: 1px 1px 31px -5px rgba(0,0,0,0.75);
-    box-shadow: 1px 1px 31px -5px rgba(0,0,0,0.75);
+}
+
+.form-container{
+    width: 1000px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 1;
+      }
+    
+      form {
+        position: relative;
+        z-index: 2;
+        background-color: transparent;
+        padding: 2rem;
+        border-radius: 10px;
+        width: 100%;
+      }
+    
 }
 
 .formulario div[class^="col-md-"] {
@@ -18,6 +46,15 @@
     margin-left: 5px;
 }
 
-h2, label{
+h2{
+    text-align: center;
     color: white;
+    font-weight: 800;
+}
+label, p{
+    color: white;
+}
+
+.invalid {
+    margin-left: 5px;
 }

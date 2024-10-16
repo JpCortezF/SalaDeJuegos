@@ -1,32 +1,34 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Firestore, addDoc, collection } from '@angular/fire/firestore';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-encuesta',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './encuesta.component.html',
   styleUrls: ['./encuesta.component.scss']
 })
-export class EncuestaComponent {
-  formulario: FormGroup;
+export class EncuestaComponent implements OnInit{
+  formulario!: FormGroup;
+  userEmail: string | null = "";
 
-  constructor(private fb: FormBuilder, private firestore: Firestore) {
+  constructor(private fb: FormBuilder, private firestore: Firestore, private userService: UserService) {}
+
+  ngOnInit(): void {
     this.formulario = this.fb.group({
-      nombre: ['', Validators.required],
-      apellido: ['', Validators.required],
+      nombre: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]],
+      apellido: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]],
+      email: this.userService.userAuth(),
       edad: ['', [Validators.required, Validators.min(18), Validators.max(99)]],
       telefono: ['', [Validators.required, Validators.pattern(/^\d{1,10}$/)]],
       sexo: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      pregunta1: ['', Validators.required],
-      servicio1: [false],
-      servicio2: [false],
-      satisfaccion: ['', Validators.required],
-      terminos: [false, Validators.requiredTrue]
+      como_llego: ['', Validators.required],
+      mejoras: ['', Validators.required],
+      favorito: ['', Validators.required],
+      nivelSatisfaccion: ['', Validators.required],
     });
   }
 

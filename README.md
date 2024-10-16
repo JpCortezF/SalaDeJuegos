@@ -1,3 +1,3 @@
-<h1> SalaJuegos
-<h2>Deploy Firebase
-<h3><a>https://salajuegos-aa70a.web.app/home
+<h1> SalaJuegos</h1>
+<h2>Deploy Firebase</h2>
+<a>https://salajuegos-aa70a.web.app/home</a>

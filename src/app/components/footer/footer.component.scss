@@ -31,6 +31,8 @@ p{
 }
 
 .Encuesta{
+    display: flex;
+    justify-content: center;
     p{
         margin-bottom: 0.8rem;
     }
@@ -38,4 +40,8 @@ p{
         color: #d13d49;
         cursor: pointer;
     }
+}
+
+.Copyright{
+    font-size: 0.9rem;
 }

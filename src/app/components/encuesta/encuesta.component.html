@@ -1,112 +1,145 @@
 <div class="container">
-  <form (ngSubmit)="onSubmit()">
-    <div class="row">
-      <div class="col-md-12 mb-5">
-        <h2>Formulario de contacto</h2>
-      </div>
-    </div>
-    <div class="row formulario">
-      <!-- Nombre y apellido -->
-      <div class="col-md-6 mb-3">
-        <label for="nombre" class="form-label">Nombre</label>
-        <small class="invalid">*</small>
-        <input type="text" class="form-control" id="nombre" formControlName="nombre" placeholder="Ingrese nombre">
-        <div *ngIf="formulario.get('nombre')?.invalid && formulario.get('nombre')?.touched" class="invalid-feedback">
-          Nombre es requerido.
+  <div class="form-container" style="background-image: url('./assets/encuesta_image.jpeg');">
+    <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-md-12 mb-5">
+          <h2>Encuesta</h2>
         </div>
       </div>
-      <div class="col-md-6 mb-3">
-        <label for="apellido" class="form-label">Apellido</label>
-        <small class="invalid">*</small>
-        <input type="text" class="form-control" id="apellido" formControlName="apellido" placeholder="Ingrese apellido">
-        <div *ngIf="formulario.get('apellido')?.invalid && formulario.get('apellido')?.touched" class="invalid-feedback">
-          Apellido es requerido.
+      <div class="row formulario">
+        <!-- Nombre -->
+        <div class="col-md-6 mb-3">
+          <label for="nombre" class="form-label">Nombre</label>
+          <small class="invalid" *ngIf="!(formulario.get('nombre')?.invalid && formulario.get('nombre')?.touched)">
+            *
+          </small>
+          <input type="text" class="form-control" id="nombre" formControlName="nombre" placeholder="Ingrese nombre">
+          <small class="invalid" *ngIf="formulario.get('nombre')?.invalid && formulario.get('nombre')?.touched">
+            El nombre solo puede contener letras.
+          </small>
+        </div>
+      
+        <!-- Apellido -->
+        <div class="col-md-6 mb-3">
+          <label for="apellido" class="form-label">Apellido</label>
+          <small class="invalid" *ngIf="!(formulario.get('apellido')?.invalid && formulario.get('apellido')?.touched)">
+            *
+          </small>
+          <input type="text" class="form-control" id="apellido" formControlName="apellido" placeholder="Ingrese apellido">
+          <small class="invalid" *ngIf="formulario.get('apellido')?.invalid && formulario.get('apellido')?.touched">
+            El apellido solo puede contener letras.
+          </small>
+        </div>
+      
+        <!-- Edad -->
+        <div class="col-md-6 mb-3">
+          <label for="edad" class="form-label">Edad</label>
+          <small class="invalid" *ngIf="!(formulario.get('edad')?.invalid && formulario.get('edad')?.touched)">
+            *
+          </small>
+          <input type="number" class="form-control" id="edad" formControlName="edad" placeholder="Ingrese edad">
+          <small class="invalid" *ngIf="formulario.get('edad')?.invalid && formulario.get('edad')?.touched">
+            Debe ser mayor de 18 años y menor de 99.
+          </small>
+        </div>
+      
+        <!-- Teléfono -->
+        <div class="col-md-6 mb-3">
+          <label for="telefono" class="form-label">Teléfono</label>       
+          <small class="invalid" *ngIf="!(formulario.get('telefono')?.invalid && formulario.get('telefono')?.touched)">
+            *
+          </small>
+          <input type="text" class="form-control" id="telefono" formControlName="telefono" placeholder="Ingrese teléfono">
+          <small class="invalid" *ngIf="formulario.get('telefono')?.invalid && formulario.get('telefono')?.touched">
+            Debe ingresar un número de teléfono válido.
+          </small>
+        </div>
+      
+        <!-- Sexo -->
+        <div class="col-md-6 mb-3">
+          <label for="sexo" class="form-label">Sexo</label>
+          <small class="invalid" *ngIf="!(formulario.get('sexo')?.invalid && formulario.get('sexo')?.touched)">
+            *
+          </small>
+          <select class="form-select" id="sexo" formControlName="sexo">
+            <option value="">Seleccione uno</option>
+            <option value="F">Femenino</option>
+            <option value="M">Masculino</option>
+          </select>
+          <small class="invalid" *ngIf="formulario.get('sexo')?.invalid && formulario.get('sexo')?.touched">
+            Debe seleccionar una opción.
+          </small>
+        </div>
+      
+        <!-- ¿Cómo te enteraste de nosotros? -->
+        <div class="col-md-6 mb-3">
+          <label for="como_llego" class="form-label">¿Cómo te enteraste de nosotros?</label>
+          <small class="invalid" *ngIf="!(formulario.get('como_llego')?.invalid && formulario.get('como_llego')?.touched)">
+            *
+          </small>
+          <input type="text" class="form-control" id="como_llego" formControlName="como_llego" placeholder="Responde aquí">
+          <small class="invalid" *ngIf="formulario.get('como_llego')?.invalid && formulario.get('como_llego')?.touched">
+            Esta pregunta es requerida.
+          </small>
+        </div>
+      
+        <!-- ¿Qué mejora añadirías a la página? -->
+        <div class="col-md-6 mb-3">
+          <label for="mejoras" class="form-label">¿Qué mejora añadirías a la página?</label>
+          <small class="invalid" *ngIf="!(formulario.get('mejoras')?.invalid && formulario.get('mejoras')?.touched)">
+            *
+          </small>
+          <input type="text" class="form-control" id="mejoras" formControlName="mejoras" placeholder="Responde aquí">
+          <small class="invalid" *ngIf="formulario.get('mejoras')?.invalid && formulario.get('mejoras')?.touched">
+            Esta pregunta es requerida.
+          </small>
+        </div>
+      
+        <!-- ¿Cuál fue tu juego favorito? -->
+        <div class="col-md-6 mb-3">
+          <label for="favorito" class="form-label">¿Cuál fue tu juego favorito?</label>         
+          <small class="invalid" *ngIf="!(formulario.get('favorito')?.invalid && formulario.get('favorito')?.touched)">
+            *
+          </small>
+          <select class="form-select" id="favorito" formControlName="favorito">
+            <option value="">Seleccione uno</option>
+            <option value="Ahorcado">1 - Ahorcado</option>
+            <option value="Preguntados">2 - Preguntados</option>
+            <option value="Mayor menor">3 - Mayor menor</option>
+            <option value="Deftionary">4 - Deftionary</option>
+          </select>
+          <small class="invalid" *ngIf="formulario.get('favorito')?.invalid && formulario.get('favorito')?.touched">
+            Debe seleccionar una opción.
+          </small>
+        </div>
+      
+        <!-- ¿Nivel de satisfacción de la página? -->
+        <div class="col-md-6 mb-5">
+          <div class="form-group">
+            <label for="nivelSatisfaccion" class="form-label">¿Nivel de satisfacción de la página?</label>
+            <small class="invalid" *ngIf="!(formulario.get('nivelSatisfaccion')?.invalid && formulario.get('nivelSatisfaccion')?.touched)">
+              *
+            </small>
+            <select class="form-control" id="nivelSatisfaccion" formControlName="nivelSatisfaccion">
+              <option value="" disabled selected>Seleccione una opción</option>
+              <option value="1">1 - Muy insatisfecho</option>
+              <option value="2">2 - Insatisfecho</option>
+              <option value="3">3 - Neutral</option>
+              <option value="4">4 - Satisfecho</option>
+              <option value="5">5 - Muy satisfecho</option>
+            </select>
+            <small class="invalid" *ngIf="formulario.get('nivelSatisfaccion')?.invalid && formulario.get('nivelSatisfaccion')?.touched">
+              Debe seleccionar un nivel de satisfacción.
+            </small>
+            
+          </div>
+        </div>
+    
+        <!-- Botón -->
+        <div class="d-grid gap-2">
+          <button type="submit" class="btn btn-primary btn-block">Aceptar</button>
         </div>
       </div>
-
-      <!-- Edad -->
-      <div class="col-md-6 mb-3">
-        <label for="edad" class="form-label">Edad</label>
-        <small class="invalid">*</small>
-        <input type="number" class="form-control" id="edad" formControlName="edad" placeholder="Ingrese edad">
-        <div *ngIf="formulario.get('edad')?.invalid && formulario.get('edad')?.touched" class="invalid-feedback">
-          Debe ser mayor de 18 años y menor de 99.
-        </div>
-      </div>
-
-      <!-- Número de teléfono -->
-      <div class="col-md-6 mb-3">
-        <label for="telefono" class="form-label">Teléfono</label>
-        <small class="invalid">*</small>
-        <input type="text" class="form-control" id="telefono" formControlName="telefono" placeholder="Ingrese teléfono">
-        <div *ngIf="formulario.get('telefono')?.invalid && formulario.get('telefono')?.touched" class="invalid-feedback">
-          Debe ingresar un número de teléfono válido (máximo 10 dígitos).
-        </div>
-      </div>
-
-      <!-- Sexo -->
-      <div class="col-md-6 mb-3">
-        <label for="sexo" class="form-label">Sexo</label>
-        <small class="invalid">*</small>
-        <select class="form-select" id="sexo" formControlName="sexo">
-          <option value="">Seleccione uno</option>
-          <option value="F">Femenino</option>
-          <option value="M">Masculino</option>
-        </select>
-        <div *ngIf="formulario.get('sexo')?.invalid && formulario.get('sexo')?.touched" class="invalid-feedback">
-          Debe seleccionar una opción.
-        </div>
-      </div>
-
-      <!-- Email -->
-      <div class="col-md-6 mb-3">
-        <label for="email" class="form-label">Email</label>
-        <small class="invalid">*</small>
-        <input type="email" class="form-control" id="email" formControlName="email" placeholder="Ingrese email">
-        <div *ngIf="formulario.get('email')?.invalid && formulario.get('email')?.touched" class="invalid-feedback">
-          Debe ingresar un email válido.
-        </div>
-      </div>
-
-      <!-- Preguntas de la encuesta -->
-      <div class="col-md-12 mb-3">
-        <label for="pregunta1" class="form-label">¿Cómo te enteraste de nosotros?</label>
-        <input type="text" class="form-control" id="pregunta1" formControlName="pregunta1" placeholder="Responde aquí">
-        <div *ngIf="formulario.get('pregunta1')?.invalid && formulario.get('pregunta1')?.touched" class="invalid-feedback">
-          Esta pregunta es requerida.
-        </div>
-      </div>
-
-      <div class="col-md-12 mb-3">
-        <label for="satisfaccion" class="form-label">¿Qué tan satisfecho estás con el servicio?</label>
-        <select class="form-select" id="satisfaccion" formControlName="satisfaccion">
-          <option value="">Seleccione uno</option>
-          <option value="1">1 - Muy insatisfecho</option>
-          <option value="2">2 - Insatisfecho</option>
-          <option value="3">3 - Neutro</option>
-          <option value="4">4 - Satisfecho</option>
-          <option value="5">5 - Muy satisfecho</option>
-        </select>
-        <div *ngIf="formulario.get('satisfaccion')?.invalid && formulario.get('satisfaccion')?.touched" class="invalid-feedback">
-          Debe seleccionar una opción.
-        </div>
-      </div>
-    </div>
-
-    <!-- Términos y condiciones -->
-    <div class="row">
-      <div class="col-md-12 mb-5">
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="terminos" formControlName="terminos">
-          <label class="form-check-label" for="terminos">Aceptar términos y condiciones</label>
-        </div>
-        <div *ngIf="formulario.get('terminos')?.invalid && formulario.get('terminos')?.touched" class="invalid-feedback">
-          Debe aceptar los términos y condiciones.
-        </div>
-      </div>
-      <div class="col-md-12 d-grid gap-2">
-        <button type="submit" class="btn btn-primary btn-block" [disabled]="formulario.invalid">Aceptar</button>
-      </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>

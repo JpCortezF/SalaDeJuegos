@@ -1,40 +1,61 @@
 <div class="container">
-    <div class="question-card">
-      <div class="category-info">
-        <img [src]="'assets/' + currentCategory + '.webp'" alt="Category Icon">
-        <h2 class="category">{{ currentCategory }}</h2>
-        <span class="time-left">{{ timeLeft }}'</span>
+    <div class="question-card" [ngStyle]="{
+      'background-image': gameModeSelected ? 'none' : 'url(./assets/trivia-menu.jpg)', 
+      'background-color': gameModeSelected ? '#2a2a3a' : 'transparent'
+      }">
+      @if(!gameModeSelected){
+      <div class="game-mode-selector">
+        <h2>Selecciona el modo de juego:</h2>
+        <img src="./assets/preguntados-personajes.png" alt="">
+        <button class="answers" (click)="selectGameMode('trivia')">Trivia de Preguntas</button>
+        <button class="answers" (click)="selectGameMode('flags')">Adivina la Bandera</button>
       </div>
-  
-      <div class="question-box">
-        <h3>{{ currentQuestion?.question }}</h3>
-      </div>
-  
-      <div class="answers">
-        <button 
-          *ngFor="let option of allAnswers" 
-          [ngClass]="{'correct-answer': option === correctAnswer && isAnswered, 
-                      'wrong-answer': option === selectedAnswer && option !== correctAnswer && isAnswered}"
-          [disabled]="isAnswered" 
-          (click)="onAnswerClick(option)">
-          {{ option }}
-        </button>
-      </div>
-      
-      <div class="next-question">
-        <div class="lives">
-          <span><h4>{{ remainingLives }}</h4><i class="fa fa-heart" style="font-size:23px;color:red"></i></span>
+      }@else{
+        @if(gameMode == 'trivia'){
+          <div class="category-info">
+            <img [src]="'assets/' + currentCategory + '.webp'" alt="Category Icon">
+            <h2 class="category">{{ currentCategory }}</h2>
+            <span class="time-left">{{ timeLeft }}'</span>
+          </div>
+
+          <div class="question-box">
+            <h3>{{ currentQuestion?.question }}</h3>
+          </div>
+        }@else {
+          <div class="question-box">
+            <h2>¿Qué bandera es esta?</h2>
+            <div class="flag-container">
+              <img [src]="currentFlagUrl" alt="Bandera" class="flag-image">
+            </div>
+          </div>        
+        }              
+    
+        <div class="answers">
+          <button 
+            *ngFor="let option of allAnswers" 
+            [ngClass]="{'correct-answer': option === correctAnswer && isAnswered, 
+                        'wrong-answer': option === selectedAnswer && option !== correctAnswer && isAnswered}"
+            [disabled]="isAnswered" 
+            (click)="onAnswerClick(option)">
+            {{ option }}
+          </button>
         </div>
-        @if(!showNextButton){
-          <div class="score">
-            <h4>{{ score }} Puntos</h4>
+        
+        <div class="next-question">
+          <div class="lives">
+            <span><h4>{{ remainingLives }}</h4><i class="fa fa-heart" style="font-size:23px;color:red"></i></span>
           </div>
-        }    
-        @if(showNextButton){
-          <div class="next-button">
-            <button (click)="LoadQuestions()">Siguiente pregunta</button>
-          </div>
-        }
-      </div>
+          @if(!showNextButton){
+            <div class="score">
+              <h4>{{ score }} Puntos</h4>
+            </div>
+          }    
+          @if(showNextButton){
+            <div class="next-button">
+              <button (click)="LoadQuestions()">Siguiente pregunta</button>
+            </div>
+          }
+        </div>
+      }
     </div>
   </div>

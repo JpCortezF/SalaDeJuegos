@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { collection, collectionData, Firestore, where, orderBy, limit, query } from '@angular/fire/firestore';
+import { collection, collectionData, Firestore, orderBy, limit, query } from '@angular/fire/firestore';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -28,7 +28,7 @@ export class RankingComponent implements OnInit, OnDestroy{
 
   async GetData(collectionName: string) {
     const col = collection(this.firestore, collectionName);
-    const q = query(col, orderBy('score', 'desc'));
+    const q = query(col, orderBy('score', 'desc'), limit(5));
 
     const observable = collectionData(q);
     this.sub.unsubscribe(); // Nos aseguramos de cancelar suscripciones anteriores

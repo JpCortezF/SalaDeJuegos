@@ -1,10 +1,10 @@
-import { addDoc, collection, collectionData, Firestore, where, orderBy, limit, query, doc, setDoc } from '@angular/fire/firestore';
+import { Firestore } from '@angular/fire/firestore';
 import { QuizContestService } from '../../services/quiz-contest.service';
 import { UserService } from '../../services/user.service';
 import { Component, OnInit } from '@angular/core';
-import { Auth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2'; 
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-preguntados',
@@ -28,6 +28,9 @@ export class PreguntadosComponent implements OnInit{
   isAnswered: boolean = false;
   userEmail: string | null = "";
   user: string = "";
+  gameMode: string = '';
+  gameModeSelected: boolean = false;
+  currentFlagUrl: string = '';
 
   private categories = [
     'geography',
@@ -36,17 +39,30 @@ export class PreguntadosComponent implements OnInit{
     'entertainment'
   ]
 
-  constructor(private router: Router, private quizService: QuizContestService, private userService: UserService, private firestore: Firestore){}
+  constructor(private router: Router, private quizService: QuizContestService, private userService: UserService, private firestore: Firestore, private http: HttpClient){}
 
   ngOnInit(): void {
     this.userEmail = this.userService.userAuth();
     if(this.userEmail){
-      this.LoadQuestions();
       this.user = this.userEmail.split('@')[0];
     }
   }
 
+  selectGameMode(mode: string): void {
+    this.gameMode = mode;
+    this.gameModeSelected = true;
+    this.LoadQuestions();
+  }
+  
   LoadQuestions(): void {
+    if (this.gameMode === 'trivia') {
+      this.LoadTriviaQuestions();
+    } else if (this.gameMode === 'flags') {
+      this.LoadFlagQuestion();
+    }
+  }
+
+  LoadTriviaQuestions(): void {
     let page = Math.floor(Math.random() * 2) + 1;
     let randomCategory = this.categories[Math.floor(Math.random() * this.categories.length)];
     
@@ -55,12 +71,31 @@ export class PreguntadosComponent implements OnInit{
         if (data && data.questions.length > 0) {
           this.questions = data.questions;
           this.LoadNextQuestion();
-        }else {
+        } else {
           console.error('La respuesta de la API no contiene preguntas.');
         }
       },
       error: (error) => {
         console.error('Error al obtener las preguntas:', error);
+      }
+    });
+  }
+
+  LoadFlagQuestion(): void {
+    this.http.get('https://restcountries.com/v3.1/all').subscribe({
+      next: (data: any) => {
+        const randomCountry = data[Math.floor(Math.random() * data.length)];
+        this.currentFlagUrl = randomCountry.flags.svg;
+        this.correctAnswer = randomCountry.translations.spa.common;
+        
+        const incorrectCountries = this.getRandomIncorrectCountries(data, randomCountry);
+        this.allAnswers = [...incorrectCountries, this.correctAnswer];
+        this.allAnswers = this.shuffle(this.allAnswers);
+        this.showNextButton = false;
+        this.isAnswered = false;
+      },
+      error: (error) => {
+        console.error('Error al cargar la bandera:', error);
       }
     });
   }
@@ -94,6 +129,17 @@ export class PreguntadosComponent implements OnInit{
         this.allAnswers = this.shuffle(this.allAnswers);
         this.currentQuestionIndex++;
       }        
+  }
+
+  getRandomIncorrectCountries(allCountries: any[], correctCountry: any): string[] {
+    const incorrectCountries = [];
+    while (incorrectCountries.length < 3) {
+      const randomCountry = allCountries[Math.floor(Math.random() * allCountries.length)];
+      if (randomCountry.translations.spa.common !== correctCountry.translations.spa.common) {
+        incorrectCountries.push(randomCountry.translations.spa.common);
+      }
+    }
+    return incorrectCountries;
   }
 
   onAnswerClick(selectedAnswer: string): void {
