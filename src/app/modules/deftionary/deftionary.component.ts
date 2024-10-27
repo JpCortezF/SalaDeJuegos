@@ -21,8 +21,15 @@ export class DeftionaryComponent implements OnInit{
     'tigre', 'león', 'moto', 'auto', 'tren', 'puerta', 'reloj', 'sol', 'luna', 'mar', 'río',
     'auricular', 'silla', 'caballo', 'madera', 'gallina', 'lápiz', 'pluma', 'pájaro', 'cielo', 'flor',
     'árbol', 'casa', 'banco', 'balde', 'mercado', 'pan', 'queso', 'leche', 'café', 'azúcar',
-    'sal', 'pimienta', 'fruta', 'nube', 'trueno', 'relámpago', 'pelota', 'vaso', 'billetera', 'jirafa'
-  ];
+    'sal', 'pimienta', 'fruta', 'nube', 'trueno', 'relámpago', 'pelota', 'vaso', 'billetera', 'jirafa',
+    'bicicleta', 'ratonera', 'botella', 'calendario', 'cama', 'carro', 'dragón', 'espejismo', 
+    'fuego', 'globo', 'huracán', 'iglesia', 'juguete', 'kilogramo', 'lavadora', 'mapa', 'naranja', 
+    'océano', 'pingüino', 'químico', 'revolución', 'serpiente', 'tortuga', 'unidad', 'viento', 'oscuridad', 
+    'yate', 'zorro', 'águila', 'blanco', 'corazón', 'diamante', 'escritorio', 'fósil', 'glaciar', 'tenedor', 
+    'isla', 'poster', 'kiosco', 'lápida', 'mamut', 'nieve', 'orquesta', 'palmera', 'quimera', 'robot', 
+    'satélite', 'tiburón', 'unicornio', 'volcán', 'whisky', 'sótano', 'granja', 'independiente'
+];
+
   palabraElegida: string = '';
   definicion: string = '';
   mensaje: string = '';
