@@ -15,63 +15,106 @@
         }
     }
 
+    .ranking-container {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 0.325rem;
+        box-sizing: border-box;
+    }
+
     .ranking-options-container {
         background-color: rgba(40, 40, 40, 0.8);
-        padding: 10px 20px;
+        padding: 10px 10px;
         border-radius: 5px;
+        width: 100%;       
     }
 
     .ranking-options {
-        margin-bottom: 10px;
-
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        padding: 0;
+        list-style: none;
+        margin: 0;
         li {
             color: white;
-            list-style: none;
-            padding: 5px 10px;
-            display: inline;
-            margin-right: 10px;
+            padding: 0.3rem 0.625rem;
             cursor: pointer;
             transition: background-color 0.3s ease;
-
+            font-size: 0.8rem;
             &:hover {
-                background-color: rgb(60, 60, 60); /* Cambia el fondo al pasar el mouse */
+                background-color: rgb(60, 60, 60);
             }
         }
     }
 
     .ranking-table{
-        background-color: rgb(245, 245, 245); /* Gris claro para fondo */
-        color: #333; /* Color de texto oscuro */
-        width: 500px;
-        border-collapse: collapse; /* Para remover espacios entre celdas */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar relieve */
+        background-color: rgb(245, 245, 245);
+        color: #333;
+        width: 100%;
+        margin: 0 auto;
+        border-collapse: collapse; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
         th, td {
             padding: 12px;
             text-align: left;
-            border: 1px solid #ddd; /* Bordes sutiles */
+            border: 1px solid #ddd;
+            font-size: 0.9rem;
         }
 
         thead {
-            background-color: #005f73; /* Azul oscuro */
+            background-color: #005f73;
             color: white;
         }
 
         tbody tr:nth-child(odd) {
-            background-color: rgb(230, 230, 230); /* Color alterno claro */
+            background-color: rgb(230, 230, 230);
         }
 
         tbody tr:hover {
-            background-color: rgb(200, 200, 200); /* Hover en filas */
+            background-color: rgb(200, 200, 200);
         }
     }
 
     ul{
         padding: 0;
     }
+    li{
+        margin: 0;
+    }
     h3 {
         color: white;
         margin-bottom: 10px;
     }
 
+    @media (max-width: 768px) {
+        .ranking-table {
+            font-size: 0.9rem;
+        }
+        
+        .ranking-options-container {
+            padding: 0.3rem;
+        }
+        .ranking-options {
+            li{
+                font-size: 0.58rem;
+            }
+        }
+    
+        .ranking-table th, .ranking-table td {
+            font-size: 0.8rem;
+            padding: 8px;
+        }
+        
+    }
+    
+    @media (max-width: 576px) {
+        .ranking-table th, .ranking-table td {
+            padding: 6px; 
+            font-size: 0.75rem;
+        }
+    }
 }
+
