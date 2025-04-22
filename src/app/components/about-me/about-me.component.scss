@@ -11,7 +11,7 @@
 }
 
 .photo img {
-  border-radius: 50%;
+  border-radius: 30%;
   max-width: 430px;
   height: auto;
 }
@@ -55,7 +55,7 @@
 @media (max-width: 1200px) {
 
   .photo img {
-    max-width: 350px;
+    width: 350px;
   }
 }
 
@@ -70,25 +70,22 @@
 
 @media (max-width: 768px) {
   .container {
-    flex-direction: column;
+    flex-direction: column-reverse;
     height: auto;
     padding: 20px;
   }
 
   .photo {
     margin-right: 0;
-    margin-bottom: 20px;
-    margin-top: 60px;
-  }
-
-  .photo img {
-    max-width: 250px;
   }
 
   .about-me {
     flex: 1 1 100%;
     max-width: 100%;
     padding: 10px;
+    margin-top: 60px;
+    margin-bottom: 20px;
+
   }
 
   .content {
@@ -104,7 +101,7 @@
     border: 0;
   }
   .photo img {
-    max-width: 200px;
+    width: 100%;
   }
 
   .about-me {
